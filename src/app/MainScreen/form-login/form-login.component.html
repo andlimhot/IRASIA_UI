@@ -1,0 +1,43 @@
+<div class="container">
+
+  <div class="logo">
+    <img src="/assets/ialogo_awal.png" alt="Logo">
+  </div>
+
+  <div class="search-bar">
+    <input type="text" placeholder="Search Products...">
+    <button class="bg-primary">
+      <i class="fa fa-search text-center"></i> Search
+    </button>
+  </div>
+  <div class="icons">
+
+    <div class="my-list">
+      <div class="icon-container">
+        <img src="/assets/notification-bell.png" alt="Logo">
+        <input type="text" class="input-text bg-primary text-center" value="0" readonly>
+      </div>
+
+    </div>
+    <div class="cart">
+      <div class="icon-container">
+        <img src="/assets/shopping-cart.png" alt="Logo">
+        <input type="text" class="input-text  bg-primary text-center" value="0" readonly>
+      </div>
+
+    </div>
+    <div class="favorite">
+      <img src="/assets/application-setting.png" alt="Logo">
+    </div>
+  </div>
+</div>
+
+<div *ngIf="images && images.length > 0" class="carousel-container">
+  <img *ngFor="let image of images; let i = index" [src]="image.imageScr" [alt]="image.imageAlt"
+    [ngClass]="{'image-active':selectedIndex === i}">
+  <div class="caraousel-dot-container">
+    <span *ngFor="let dot of images; let i=index" class="dot" [ngClass]="{'active': selectedIndex===i}"
+      (click)="selectedImage(i)">
+    </span>
+  </div>
+</div>

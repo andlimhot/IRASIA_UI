@@ -1,0 +1,47 @@
+<div class="container">
+
+
+  <div class="logo">
+      <img src="/assets/ialogo_awal.png" alt="Logo">
+  </div>
+
+
+
+  <div class="search-bar">
+      <input type="text" placeholder="Search Products...">
+      <button>
+          <i class="fa fa-search"></i> Search
+      </button>
+  </div>
+
+  <div class="icons">
+
+      <div class="my-list">
+        <div class="icon-container">
+          <button mat-button (click)="openDialog()">Open dialog</button>
+        </div>
+  
+      </div>
+      <div class="cart">
+        <div class="icon-container">
+          <div class="vl"></div>
+        </div>
+  
+      </div>
+      <div class="favorite">
+          <a href="url">Register</a>
+      </div>    
+    </div>
+</div>
+
+<div *ngIf="images && images.length > 0" class="carousel-container">
+  <img *ngFor="let image of images; let i = index" [src]="image.imageScr" [alt]="image.imageAlt"
+      [ngClass]="{'image-active':selectedIndex === i}">
+
+  <div class="caraousel-dot-container">
+      <span *ngFor="let dot of images; let i=index" class="dot" [ngClass]="{'active': selectedIndex===i}"
+          (click)="selectedImage(i)">
+
+      </span>
+  </div>
+</div>

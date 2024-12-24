@@ -1,10 +1,20 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, AfterViewInit, OnInit, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
-  title = 'IRASIA_UI';
+
+
+
+export class AppComponent implements OnInit {
+ logon: boolean=false;
+
+
+  ngOnInit(): void {  
+    
+  }
+
 }

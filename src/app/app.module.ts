@@ -6,18 +6,21 @@ import { FormLoginComponent } from './MainScreen/form-login/form-login.component
 import { FormLogoutComponent } from './MainScreen/form-logout/form-logout.component';
 import { FormUserLoginComponent } from './MainScreen/form-user-login/form-user-login.component';
 import { HeaderCompComponent } from './MainScreen/header-comp/header-comp.component';
-import { FormRegistrasiComponent } from './MainScreen/form-registrasi/form-registrasi.component';
+import { RegistrationComponent } from "./MainScreen/Forms/registration/registration.component";
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderCompComponent,
-    FormRegistrasiComponent,   
+    HeaderCompComponent, 
   ],
   imports: [
     BrowserModule, FormLoginComponent,
-    FormLogoutComponent, FormUserLoginComponent
-  ],
+    FormLogoutComponent, FormUserLoginComponent,
+    RegistrationComponent,HttpClientModule, BrowserAnimationsModule
+],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,244 @@
+<div class="divide-y divide-blue-200">
+  <div>
+    <p class="text-5xl text-blue-600 font-weight: 800 font-sans hover:font-serif">Registration</p>
+  </div>
+  <form [formGroup]="RegisForm">
+    <div >
+      <mat-tab-group>
+<!--  TAB GENERAL-->  
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">account_circle</mat-icon>
+              General
+            </ng-template>
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <label for="companyname" class="block text-sm/6 font-medium text-gray-900">Company Name</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+ 
+                    <input type="text" formControlName="ccregName" name="ccregName" id="ccregName" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:col-span-4">
+                <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">Alias Name / Known name</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                    <input type="text" formControlName="ccregNickName" name="ccregNickName" id="ccregNickName" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <label for="nik" class="block text-sm/6 font-medium text-gray-900">National ID</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                    <input type="text" formControlName="ccregNationId" name="ccregNationId" id="ccregNationId" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>              
+            </div>
+           
+            <div class="row">
+              <div class="col-8">
+                <label class="btn btn-default p-0">
+                <input type="file" accept="image/*" (change)="selectImageNik($event)"  />
+                </label>
+              </div>
+            </div>
+            <div class="box-border h-29 w-52  border-2">
+              <div>
+                <img [src]="preview" class="preview" />
+              </div>
+            </div>
+           
+
+            <div>
+              <p class="text-2xl text-blue-600 font-weight: 800 font-sans hover:font-serif text-center">Member B2B</p>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <label for="nik" class="block text-sm/6 font-medium text-gray-900">Single business No</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                    <input type="text" formControlName="ccregNationId" name="ccregNationId" id="ccregNationId" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>              
+            </div>
+
+            <div class="row">
+              <div class="col-8">
+                <label class="btn btn-default p-0">
+                <input type="file" accept="image/*" (change)="selectImageNib($event)"  />
+                </label>
+              </div>
+            </div>
+
+            <div class="box-border h-29 w-52  border-2">
+              <div>
+                <img [src]="preview2" class="preview"  />
+              </div>
+            </div>
+            
+          </mat-tab>
+
+<!--  TAB ADDRESS-->          
+        
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">home</mat-icon>
+              Address
+            </ng-template>
+           
+            <div class="col-span-full">
+              <label for="street-address" class="block text-sm/6 font-medium text-gray-900">Street address</label>
+              <div class="mt-2">
+                <input type="text" formControlName="ccregAddress" name="ccregAddress" id="ccregAddress" autocomplete="street-address" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              </div>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <label for="companyname" class="block text-sm/6 font-medium text-gray-900">RT</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+ 
+                    <input type="text" formControlName="ccregRt" name="ccregRt" id="ccregRt" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:col-span-4">
+                <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">RW</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                    <input type="text" formControlName="ccregRw" name="ccregRw" id="ccregRw" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <mat-form-field>
+                  <mat-label>Province</mat-label>
+                  <mat-select>
+                   
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="sm:col-span-4">
+                <mat-form-field>
+                  <mat-label>City</mat-label>
+                  <mat-select>
+                   
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-5">
+                <mat-form-field>
+                  <mat-label>District</mat-label>
+                  <mat-select>
+                   
+                  </mat-select>
+                </mat-form-field>
+              </div>
+
+              <div class="sm:col-span-5">
+                <mat-form-field>
+                  <mat-label>Village</mat-label>
+                  <mat-select>
+                   
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <label for="companyname" class="block text-sm/6 font-medium text-gray-900">Area Name</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+ 
+                    <input type="text" formControlName="ccregArea" name="ccregArea" id="ccregArea" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:col-span-4">
+                <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">ZIP Code</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                    <input type="text" formControlName="ccregZip" name="ccregZip" id="ccregZip" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-flow-col gap-4 auto-cols-max hover:auto-cols-min">
+              <div class="sm:col-span-4">
+                <label for="companyname" class="block text-sm/6 font-medium text-gray-900">Phone No</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+ 
+                    <input type="text" formControlName="ccregPhone" name="ccregPhone" id="ccregPhone" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+
+              <div class="sm:col-span-4">
+                <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">latitude and longitude</label>
+                <div class="mt-2">
+                  <div class="flex items-center rounded-md bg-white pl-3 outline outline-1 -outline-offset-1 outline-gray-300 focus-within:outline focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
+                    <input type="text" formControlName="ccregLongLat" name="ccregLongLat" id="ccregLongLat" class="block min-w-0 grow py-1.5 pl-1 pr-3 text-base text-gray-900 placeholder:text-gray-400 focus:outline focus:outline-0 sm:text-sm/6">
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </mat-tab>
+
+<!--  TAB BANK-->  
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">account_balance</mat-icon>
+              Bank
+            </ng-template>
+        
+            Content 3
+          </mat-tab>
+  
+<!--  TAB APPROVAL-->  
+          <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">how_to_reg</mat-icon>
+                Aprroval
+              </ng-template>
+              Content 2
+            </mat-tab>
+
+<!--  TAB LOGIN-->  
+            <mat-tab>
+              <ng-template mat-tab-label>
+                <mat-icon class="example-tab-icon">tv_singin</mat-icon>
+                Login
+              </ng-template>
+          
+              Content 3
+            </mat-tab>
+  
+        </mat-tab-group>
+    </div>
+  </form>
+ 
+</div>

@@ -8,6 +8,7 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule }
 import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 interface Food {
   value: string;
@@ -17,8 +18,8 @@ interface Food {
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [CommonModule,MatTabsModule, MatIconModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, MatInputModule, FormsModule
-  ],
+  imports: [CommonModule,MatTabsModule, MatIconModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, 
+    MatCheckboxModule, MatInputModule, FormsModule],
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
@@ -30,6 +31,8 @@ nibimage?:File;
 message='';
 preview='';
 preview2='';
+bankrcv:boolean=true;
+maxapp:number=0;
 
 foods: Food[] = [
   {value: 'steak-0', viewValue: 'Steak'},
@@ -85,6 +88,7 @@ constructor(private regiServ : RegisServiceService, private formBuider: FormBuil
 
 ngOnInit(): void {
   throw new Error('Method not implement');
+  this.maxapp=0;
 }
 
 
@@ -145,7 +149,19 @@ selectImageNib(event : any){
       reader.readAsDataURL(this.nibimage);
     }
   }
+}
 
+showSentBank(){
+  if (this.bankrcv===true){
+    this.bankrcv=false;
+  }else{
+    this.bankrcv=true;
+  };
+}
+
+maxpic(ob:any) {
+  console.log(ob.value);
+ 
 }
 
 }

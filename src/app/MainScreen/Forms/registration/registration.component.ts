@@ -9,6 +9,12 @@ import {MatSelectModule} from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { Observable } from 'rxjs';
+import { provincemdl } from '../../Models/provincemdl';
+import { citymdl } from '../../Models/citymdl';
+import { kecamatanmdl } from '../../Models/kecamatanmdl';
+import { kelurahanmdl } from '../../Models/kelurahanmdl';
+import { bankmdl } from '../../Models/bankmdl';
 
 interface Food {
   value: string;
@@ -33,6 +39,26 @@ preview='';
 preview2='';
 bankrcv:boolean=true;
 maxapp:number=0;
+vprov=new FormControl('');
+vcity=new FormControl('');
+vkec=new FormControl('');
+vkel=new FormControl('');
+selectedprov: string = 'a';
+selectedcity: string = 'a';
+selectedkec: string = 'a';
+selectedkel: string = 'a';
+selectedbank: string = 'a';
+//optionsprov: string[] = [];
+//filteredprov: Observable<string[]>;
+//optionscity: string[] = [];
+//filteredcity: Observable<string[]>;
+//optionskec: string[] = [];
+//optionskel: string[] = [];
+provlist:provincemdl[]=[];
+citylist:citymdl[]=[];
+keclist:kecamatanmdl[]=[];
+kellist:kelurahanmdl[]=[];
+banklist:bankmdl[]=[];
 
 foods: Food[] = [
   {value: 'steak-0', viewValue: 'Steak'},
@@ -87,9 +113,75 @@ constructor(private regiServ : RegisServiceService, private formBuider: FormBuil
 }
 
 ngOnInit(): void {
+  this.getprovince();
   throw new Error('Method not implement');
-  this.maxapp=0;
 }
+
+changebank(value: any) {
+  this.selectedbank = value;
+}
+
+getbank() {
+  this.banklist = [];  
+  this.regiServ.getBankALL().subscribe((res: bankmdl[]) => {
+    this.banklist = res;   
+  });
+}
+
+changeprov(value: any) {
+  this.citylist=[];
+  this.keclist = [];  
+  this.kellist = [];  
+  this.selectedprov = value;
+  this.getcity(this.selectedprov);
+}
+
+getprovince() {
+  this.provlist = [];
+  this.regiServ.getProvinceALL().subscribe((res: provincemdl[]) => {
+    this.provlist = res;   
+    console.log(this.provlist.length);
+  });
+}
+
+changecity(value: any) {
+  this.keclist = [];  
+  this.kellist = [];  
+  this.selectedcity = value;
+  this.getkecamatan(this.selectedcity);
+}
+
+getcity(ct:string) {
+  this.citylist = [];
+  this.regiServ.getcitybyprovALL(ct).subscribe((res: citymdl[]) => {
+    this.citylist = res;   
+  });
+}
+
+changekecamatan(value: any) {
+  this.kellist = [];  
+  this.selectedkec = value;
+  this.getkelurahan( this.selectedkec);
+}
+
+getkecamatan(kc:string) {
+  this.kellist = [];  
+  this.regiServ.getKecbyCityALL(kc).subscribe((res: kecamatanmdl[]) => {
+    this.keclist = res;   
+  });
+}
+
+changekelurahan(value: any) {
+  this.selectedkel = value;
+}
+
+getkelurahan(kl:string) {
+  this.kellist = [];  
+  this.regiServ.getKelbyKecALL(kl).subscribe((res: kelurahanmdl[]) => {
+    this.kellist = res;   
+  });
+}
+
 
 
 saveRegis(){

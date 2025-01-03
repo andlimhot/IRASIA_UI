@@ -47,14 +47,11 @@
               <div class="col-8">
                 <label class="btn btn-default p-0">
                 <input type="file" accept="image/*" (change)="selectImageNik($event)"  />
+                <img [src]="preview" alt="Image Preview" height="90px" width="130px" >
                 </label>
               </div>
             </div>
-            <div class="box-border h-29 w-52  border-2">
-              <div>
-                <img [src]="preview" class="preview" />
-              </div>
-            </div>
+          
            
 
             <div>
@@ -76,15 +73,12 @@
               <div class="col-8">
                 <label class="btn btn-default p-0">
                 <input type="file" accept="image/*" (change)="selectImageNib($event)"  />
+                <img [src]="preview2" alt="Image Preview" height="90px" width="130px" >
                 </label>
               </div>
             </div>
 
-            <div class="box-border h-29 w-52  border-2">
-              <div>
-                <img [src]="preview2" class="preview"  />
-              </div>
-            </div>
+           
             
           </mat-tab>
 
@@ -129,9 +123,9 @@
                 <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">Province</label>
                 <mat-form-field>
                   <mat-label>Province</mat-label>
-                  <mat-select>
-                   
-                  </mat-select>
+                  <mat-select formControlName="ccregProvId" name="pro" (selectionChange)="changeprov($event.value)">
+                    <mat-option *ngFor="let pro of provlist" [value]="pro.cmpsiProvCode">{{ pro.cmpsiProvinsi }}</mat-option>
+                </mat-select>
                 </mat-form-field>
               </div>
 
@@ -139,9 +133,9 @@
                 <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">City</label>
                 <mat-form-field>
                   <mat-label>City</mat-label>
-                  <mat-select>
-                   
-                  </mat-select>
+                    <mat-select formControlName="ccregCityId" name="cit" (selectionChange)="changecity($event.value)">
+                      <mat-option *ngFor="let cit of citylist" [value]="cit.cmcitCityCode">{{ cit.cmcitCity }}</mat-option>
+                    </mat-select>
                 </mat-form-field>
               </div>
             </div>
@@ -151,8 +145,8 @@
                 <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">District</label>
                 <mat-form-field>
                   <mat-label>District</mat-label>
-                  <mat-select>
-                   
+                  <mat-select formControlName="ccregKecId" name="kc" (selectionChange)="changekecamatan($event.value)">
+                    <mat-option *ngFor="let kc of keclist" [value]="kc.cmkecCityCode">{{ kc.cmkecKecamatan }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>
@@ -161,8 +155,8 @@
                 <label for="aliasname" class="block text-sm/6 font-medium text-gray-900">Village</label>
                 <mat-form-field>
                   <mat-label>Village</mat-label>
-                  <mat-select>
-                   
+                  <mat-select formControlName="ccregKelId" name="kl" (selectionChange)="changekelurahan($event.value)">
+                    <mat-option *ngFor="let kl of kellist" [value]="kl.cmkelKelCode">{{ kl.cmkelKelurahan }}</mat-option>
                   </mat-select>
                 </mat-form-field>
               </div>

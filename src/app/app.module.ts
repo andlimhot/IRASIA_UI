@@ -9,6 +9,7 @@ import { HeaderCompComponent } from './MainScreen/header-comp/header-comp.compon
 import { RegistrationComponent } from "./MainScreen/Forms/registration/registration.component";
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RequestUploadListComponent } from './RequestEC/Forms/request-upload-list/request-upload-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   imports: [
     BrowserModule, FormLoginComponent,
     FormLogoutComponent, FormUserLoginComponent,
-    RegistrationComponent,HttpClientModule, BrowserAnimationsModule
+    RegistrationComponent, HttpClientModule, BrowserAnimationsModule,
+    RequestUploadListComponent
 ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatIconModule} from '@angular/material/icon';
@@ -15,6 +15,7 @@ import { citymdl } from '../../Models/citymdl';
 import { kecamatanmdl } from '../../Models/kecamatanmdl';
 import { kelurahanmdl } from '../../Models/kelurahanmdl';
 import { bankmdl } from '../../Models/bankmdl';
+import { HttpClient, HttpEventType, HttpResponse } from '@angular/common/http';
 
 interface Food {
   value: string;
@@ -29,7 +30,7 @@ interface Food {
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent implements OnInit,AfterViewInit  {
 vreg : regismdl[]=[];
 RegisForm: FormGroup;
 nikimage?:File;
@@ -59,14 +60,29 @@ citylist:citymdl[]=[];
 keclist:kecamatanmdl[]=[];
 kellist:kelurahanmdl[]=[];
 banklist:bankmdl[]=[];
+regid:number=0;
+nikimg:string="a";
+nibimg:string="a";
+vregid:number=0;
+to: string = '';
+subject: string = '';
+otp: string = '';
+filepathnamenik:string='';
+filepathnamenib:string='';
 
-foods: Food[] = [
-  {value: 'steak-0', viewValue: 'Steak'},
-  {value: 'pizza-1', viewValue: 'Pizza'},
-  {value: 'tacos-2', viewValue: 'Tacos'},
+selectedFilenik: File | null = null;
+selectedFilenib: File | null = null;
+dirname: string = '';
+uploadProgress: number | null = null;
+uploadMessage: string | null = null;
+@ViewChild('iconList') iconList!: ElementRef;
+icons = [
+  'home', 'search', 'favorite', 'settings', 'person', 'info', 
+  'help', 'event', 'work', 'school', 'local_cafe', 'restaurant',
+  // ... tambahkan ikon lainnya sesuai kebutuhan
 ];
 
-constructor(private regiServ : RegisServiceService, private formBuider: FormBuilder){
+constructor(private regiServ : RegisServiceService, private formBuider: FormBuilder, private http: HttpClient){
   this.RegisForm = this.formBuider.group({
     ccregId: '',
     ccregName: '',
@@ -109,22 +125,45 @@ constructor(private regiServ : RegisServiceService, private formBuider: FormBuil
     ccregPic3Phone: '',
     ccregPic3Email: '',
     ccregPic3password: '',
+    ccreg_type:'',
+    ccreg_password:''
   })
 }
 
+ngAfterViewInit() {
+  const iconElements = this.iconList.nativeElement.querySelectorAll('.icon'); // Perbaikan di sini
+    let totalWidth = 0;
+    
+    // Hitung lebar total 5 ikon pertama
+    for (let i = 0; i < 5 && i < iconElements.length; i++) {
+      totalWidth += iconElements[i].offsetWidth; 
+    }
+
+    // Atur lebar `icon-list` sesuai total lebar 5 ikon
+    this.iconList.nativeElement.style.width = `${totalWidth}px`;
+  }
 ngOnInit(): void {
   this.getprovince();
+  this.getRegId();
   throw new Error('Method not implement');
 }
 
 changebank(value: any) {
   this.selectedbank = value;
 }
-
+/*
 getbank() {
   this.banklist = [];  
   this.regiServ.getBankALL().subscribe((res: bankmdl[]) => {
     this.banklist = res;   
+  });
+}
+*/
+getRegId() {
+
+  this.regiServ.getRegId().subscribe((res: any) => {
+    this.vregid = res;   
+    
   });
 }
 
@@ -182,13 +221,40 @@ getkelurahan(kl:string) {
   });
 }
 
+sendEmail() {
+  this.http.get<string>(`/reg/send-email?to=${this.to}&subject=${this.subject}`)
+    .subscribe(
+      response => {
+        this.otp = response;
+        console.log('OTP received:', this.otp);
+        // You can now use this OTP for further actions, e.g., display it to the user
+      },
+      error => {
+        console.error('Error sending email:', error);
+        // Handle the error appropriately, e.g., display an error message to the user
+      }
+    );
+}
 
 
 saveRegis(){
+  this.filepathnamenik="D:\\iasia\\UI\\IMAGES\\REGISTRATIONS\\"+this.vregid.toString()+"\\"+this.nikimg;
+  this.filepathnamenib="D:\\iasia\\UI\\IMAGES\\REGISTRATIONS\\"+this.vregid.toString()+"\\"+this.nibimg;
+
+    this.RegisForm.patchValue({
+    ccregId: this.vregid,
+
+    ccregNationImgFileName:  this.nikimg,
+    ccregNibImgFileName:  this.nibimg,
+    ccregNationImgFilePath:this.filepathnamenik,
+    ccregNibImgFilePath:this.filepathnamenib
+  });
+
   this.regiServ.saveupdateRegis(this.RegisForm.value).subscribe({
     next: (val: any) => {
       alert(val);
       //  alert('saveeee')
+      this.onUpload();
     },
     error: (err: any) => {
       console.log(err);
@@ -200,13 +266,13 @@ selectImageNik(event : any){
   this.message='';
   this.preview='';
   const selectedNik = event.target.files;
-
+  this.selectedFilenik = event.target.files[0] as File;
   if (selectedNik){
     const nik:File | null =selectedNik.item(0);
     if (nik){
       this.preview='';
       this.nikimage=nik;
-
+      this.nikimg=this.nikimage.name;
       const reader = new FileReader();
 
       reader.onload=(e:any) => {
@@ -217,20 +283,20 @@ selectImageNik(event : any){
       reader.readAsDataURL(this.nikimage);
     }
   }
-
 }
 
 selectImageNib(event : any){
   this.message='';
   this.preview2='';
   const selectedNib = event.target.files;
-
+  alert("aaaaaa");
+  this.selectedFilenib = event.target.files[0] as File;
   if (selectedNib){
     const nib:File | null =selectedNib.item(0);
     if (nib){
       this.preview2='';
       this.nibimage=nib;
-
+      this.nibimg=this.nibimage.name;
       const reader = new FileReader();
 
       reader.onload=(e:any) => {
@@ -251,9 +317,68 @@ showSentBank(){
   };
 }
 
-maxpic(ob:any) {
-  console.log(ob.value);
- 
+
+
+
+onUpload(): void {
+  if (!this.selectedFilenik) {
+    this.uploadMessage = 'Please select a file and enter a directory name.';
+    return;
+  }
+
+  if (!this.selectedFilenib) {
+    this.uploadMessage = 'Please select a file and enter a directory name.';
+    return;
+  }
+
+  this.uploadProgress = 0;
+  this.uploadMessage = null;
+
+  const formData = new FormData();
+  formData.append('file', this.selectedFilenik);
+  formData.append('dirname', this.vregid.toString());
+
+  this.http.post('http://localhost:8091/wc-svc/file/RegisUpload', formData, {
+    reportProgress: true,
+    observe: 'events'
+  }).subscribe(event => {
+    if (event.type === HttpEventType.UploadProgress) {
+      this.uploadProgress = Math.round(100 * event.loaded / event.total!);
+    } else if (event instanceof HttpResponse) {
+      this.uploadMessage = event.body as string;
+      this.selectedFilenik = null;
+      this.dirname = '';
+      this.uploadProgress = null;
+    }
+  }, error => {
+    this.uploadMessage = 'Upload failed: ' + error.message;
+    this.uploadProgress = null;
+  });
+
+  this.uploadProgress = 0;
+  this.uploadMessage = null;
+
+  const formData2 = new FormData();
+  formData2.append('file', this.selectedFilenib);
+  formData2.append('dirname', this.vregid.toString());
+
+  this.http.post('http://localhost:8091/wc-svc/file/RegisUpload', formData2, {
+    reportProgress: true,
+    observe: 'events'
+  }).subscribe(event => {
+    if (event.type === HttpEventType.UploadProgress) {
+      this.uploadProgress = Math.round(100 * event.loaded / event.total!);
+    } else if (event instanceof HttpResponse) {
+      this.uploadMessage = event.body as string;
+      this.selectedFilenib = null;
+      this.dirname = '';
+      this.uploadProgress = null;
+    }
+  }, error => {
+    this.uploadMessage = 'Upload failed: ' + error.message;
+    this.uploadProgress = null;
+  });
+}
 }
 
-}
+

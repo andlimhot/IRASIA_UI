@@ -40,5 +40,6 @@ export interface regismdl {
     ccregPic3Phone: String,
     ccregPic3Email: String,
     ccregPic3password: String,
+    ccreg_type:string
 }
 

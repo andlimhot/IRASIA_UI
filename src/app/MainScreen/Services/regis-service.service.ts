@@ -16,6 +16,9 @@ export class RegisServiceService {
   getProvinceALL(): Observable<any>{
     return this.http.get<Array<provincemdl>>("http://localhost:8090/am-svc/appmst/getCmpsiListAll");  
   }
+RegistrationId(): Observable<any>{
+    return this.http.get<Array<provincemdl>>("http://localhost:8090/am-svc/appmst/getCmpsiListAll");  
+  }
 
   getcitybyprovALL(provcode:string): Observable<any>{
     return this.http.get<Array<citymdl>>("http://localhost:8090/am-svc/appmst/getCmcitListByProvCode?ProvCode="+provcode);  
@@ -29,15 +32,15 @@ export class RegisServiceService {
     return this.http.get<Array<kelurahanmdl>>("http://localhost:8090/am-svc/appmst/getCmkelListByKecCode?KecCode="+keccode);  
   }
 
-  
-
-  getBankALL(): Observable<any>{
-    return this.http.get<Array<kelurahanmdl>>("http://localhost:8090/am-svc/appmst/getCmbaListAll");  
+  getRegId(): Observable<any>{
+    return this.http.get<Array<number>>("http://localhost:8091/wc-svc/reg/getregid");  
   }
+
+
   
   
   saveupdateRegis(data:any):Observable<any>{   
-    return this.http.post("http://localhost:9509/invrep-svc/bahanbaku/saveupdbatchbaku",data, {responseType: 'text' as 'text'});
+    return this.http.post("http://localhost:8091/wc-svc/reg/saveupdreg",data, {responseType: 'text' as 'text'});
    }
 
 }

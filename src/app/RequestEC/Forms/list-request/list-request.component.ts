@@ -20,16 +20,19 @@ import { RequestServService } from '../../Services/request-serv.service';
 import { RequestUploadListComponent } from '../request-upload-list/request-upload-list.component';
 
 
+
 @Component({
   selector: 'app-list-request',
   standalone: true,
   imports: [CommonModule, RouterLink, RouterLinkActive,MatInputModule,MatButtonModule,MatCardModule,
     MatFormFieldModule,MatNativeDateModule,MatPaginatorModule,MatTableModule,
-    MatIconModule, FormsModule, ReactiveFormsModule,MatDialogModule,
-    MatSortModule,RouterOutlet,  RouterModule],
+    MatIconModule, FormsModule, ReactiveFormsModule,MatDialogModule, 
+    MatSortModule,  RouterModule, RouterModule, RouterLink],
   templateUrl: './list-request.component.html',
   styleUrls: ['./list-request.component.css']
 })
+
+
 export class ListRequestComponent implements OnInit{
   displayedColumns: string[] = ['nourut', 'vrlReqno','vrlCustno','vrlDate','vrlStatus','vrlDateSort','vrlProductNo','action'];
   vrllist:vrequestlist[]=[];
@@ -93,6 +96,13 @@ export class ListRequestComponent implements OnInit{
         dialogRef.componentInstance.p_type='ptranstype';
   
       }
+
+      viewAddJournal(tipe:string){
+       
+        this._router.navigate(['RequestCU', tipe]);
+     
+       
+        }
 
      
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
@@ -12,15 +12,18 @@ import { productlist } from 'src/app/MasterApps/Models/productlist';
 import { producttypelist } from 'src/app/MasterApps/Models/productypelist';
 import { ProductProducttypeServService } from 'src/app/MasterApps/Services/product-producttype-serv.service';
 import { RequestDtl } from '../../Models/RequestDtl';
+import { ActivatedRoute, RouterLink, RouterLinkActive, RouterModule, RouterOutlet, Routes } from '@angular/router';
 
 @Component({
   selector: 'app-request-upload-list',
   standalone: true,
   imports: [CommonModule,MatTabsModule, MatIconModule, ReactiveFormsModule, MatSelectModule, MatFormFieldModule, 
-      MatCheckboxModule, MatInputModule, FormsModule],
+      MatCheckboxModule, MatInputModule, FormsModule, RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './request-upload-list.component.html',
   styleUrls: ['./request-upload-list.component.css']
 })
+
+
 export class RequestUploadListComponent implements OnInit {
   p_usr : string="aaaaa";
   p_type:string ="aaaaa";
@@ -104,12 +107,18 @@ export class RequestUploadListComponent implements OnInit {
   file4: any = null;
   requestNumber: string = '';
 
-  constructor(private reqServ : RequestServService, private formBuider: FormBuilder, private masterserv: ProductProducttypeServService){
+  constructor(private reqServ : RequestServService, private formBuider: FormBuilder, 
+    private route: ActivatedRoute,private masterserv: ProductProducttypeServService){
     
   }
 
 
   ngOnInit(): void {  
+    
+    this.route.params.subscribe(params => {
+     this.p_type = params['param1'];
+    });
+    alert('bbbbbb :'+this.p_type);
     this.getProductList();
   }
 

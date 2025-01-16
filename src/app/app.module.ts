@@ -11,19 +11,26 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestUploadListComponent } from './RequestEC/Forms/request-upload-list/request-upload-list.component';
 import { ListRequestComponent } from './RequestEC/Forms/list-request/list-request.component';
+import { RouterModule, Routes } from '@angular/router';
+import { routes } from './app.routes';
 
+const ROUTES: Routes = [ 
+  { path: 'RequestList', component: ListRequestComponent },
+  { path: 'RequestCU/:param1', component: RequestUploadListComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderCompComponent, 
+    HeaderCompComponent
   ],
   imports: [
     BrowserModule, FormLoginComponent,
     FormLogoutComponent, FormUserLoginComponent,
     RegistrationComponent, HttpClientModule, BrowserAnimationsModule,
-    RequestUploadListComponent, ListRequestComponent
+    RequestUploadListComponent, ListRequestComponent,   RouterModule.forRoot(ROUTES)
 ],
+
   providers: [],
   bootstrap: [AppComponent]
 })

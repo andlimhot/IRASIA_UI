@@ -11,8 +11,8 @@ import { Component, ElementRef, ViewChild, AfterViewInit, OnInit, Input } from '
 
 export class AppComponent implements OnInit {
  logon: boolean=false;
-
-
+ showSolutions:boolean = false; 
+ isOpen : boolean= false;
   ngOnInit(): void {  
     
   }

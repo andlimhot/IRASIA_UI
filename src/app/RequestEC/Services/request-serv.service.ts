@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { RequestDtl } from '../Models/RequestDtl';
+import { vrequestlist } from '../Models/vrequestlist';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,10 @@ export class RequestServService {
 
   getReqEcById(id: number): Observable<RequestDtl> {
     return this.http.get<RequestDtl>("http://localhost:8091/wc-svc/webcust/getCtecdListByCtechId?CtechId="+id);
+  }
+
+  getVReqByuser(usr:string): Observable<vrequestlist[]> {
+    return this.http.get<vrequestlist[]>("http://localhost:8091/wc-svc/webcust/getVReqByUser?usr="+usr);
   }
 
   createReqWeb(userid: string, data: RequestDtl, file1: File, file2: File, file3: File, file4: File): Observable<string> {

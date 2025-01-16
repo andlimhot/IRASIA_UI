@@ -47,13 +47,13 @@
             <div class="grid grid-cols-2 gap-4">
                 <div class="mb-4">
                     <label for="first_name" class="block text-gray-700 font-bold mb-2">Alias</label>
-                    <input type="text" id="first_name"
+                    <input type="text" id="alias" [(ngModel)]="data.ctecdProductTypeAlias"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Alias">
                 </div>
                 <div class="mb-4">
                     <label for="last_name" class="block text-gray-700 font-bold mb-2">Stock</label>
-                    <input type="text" id="last_name"
+                    <input type="text" id="stock" [(ngModel)]="data.ctecdProducttypeStockQty"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Stock">
                 </div>
@@ -62,13 +62,13 @@
             <div class="grid grid-cols-2 gap-4">
                 <div class="mb-4">
                     <label for="first_name" class="block text-gray-700 font-bold mb-2">Price </label>
-                    <input type="text" id="first_name"
+                    <input type="text" id="price" [(ngModel)]="data.ctecdProducttypePrice"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Harga">
                 </div>
                 <div class="mb-4">
                     <label for="last_name" class="block text-gray-700 font-bold mb-2">Min Purchase</label>
-                    <input type="text" id="last_name"
+                    <input type="text" id="mipurchase" [(ngModel)]="data.ctecdProducttypeMinQty"
                         class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Min. Penjualan">
                 </div>
@@ -84,8 +84,8 @@
                             <div class="col-span-1">
                                 <div class="col-span-8">
                                     <label class="cursor-pointer inline-block p-0 relative">
-                                        <input type="file" accept="image/*" class="hidden" id="file1" name="file1" (change)="onFileSelected($event, 1)" />
-                                        <img [src]="preview2" alt="Image Preview2" class="h-24 w-32" />
+                                        <input type="file" accept="image/*"  id="file1" name="file1" (change)="onFileSelected($event, 1)" />
+                                        <img [src]="preview" alt="Image Preview1" class="h-24 w-32" />
                                         <div
                                             class="absolute inset-0 bg-gray-400 opacity-50 rounded-md flex items-center justify-center">
                                             <span class="text-white font-bold">Pilih File</span>
@@ -97,7 +97,7 @@
                             <div class="col-span-1">
                                 <div class="col-span-8">
                                     <label class="cursor-pointer inline-block p-0 relative my-4">
-                                        <input type="file" accept="image/*" class="hidden" id="file2" name="file2" (change)="onFileSelected($event, 2)"/>
+                                        <input type="file" accept="image/*"  id="file2" name="file2" (change)="onFileSelected($event, 2)"/>
                                         <img [src]="preview2" alt="Image Preview2" class="h-24 w-32" />
                                         <div
                                             class="absolute inset-0 bg-gray-400 opacity-50 rounded-md flex items-center justify-center">
@@ -112,8 +112,8 @@
                             <div class="col-span-1">
                                 <div class="col-span-8">
                                     <label class="cursor-pointer inline-block p-0 relative">
-                                        <input type="file" accept="image/*" class="hidden" id="file3" name="file3" (change)="onFileSelected($event, 3)" />
-                                        <img [src]="preview3" alt="Image Preview2" class="h-24 w-32" />
+                                        <input type="file" accept="image/*" id="file3" name="file3" (change)="onFileSelected($event, 3)" />
+                                        <img [src]="preview3" alt="Image Preview3" class="h-24 w-32" />
                                         <div
                                             class="absolute inset-0 bg-gray-400 opacity-50 rounded-md flex items-center justify-center">
                                             <span class="text-white font-bold">Pilih File</span>
@@ -125,8 +125,8 @@
                             <div class="col-span-1">
                                 <div class="col-span-8">
                                     <label class="cursor-pointer inline-block p-0 relative my-4">
-                                        <input type="file" accept="image/*" class="hidden" id="file4" name="file4" (change)="onFileSelected($event, 4)"/>
-                                        <img [src]="preview4" alt="Image Preview2" class="h-24 w-32" />
+                                        <input type="file" accept="image/*" id="file4" name="file4" (change)="onFileSelected($event, 4)"/>
+                                        <img [src]="preview4" alt="Image Preview4" class="h-24 w-32" />
                                         <div
                                             class="absolute inset-0 bg-gray-400 opacity-50 rounded-md flex items-center justify-center">
                                             <span class="text-white font-bold">Pilih File</span>
@@ -149,21 +149,21 @@
 
         <div class="mb-4">
             <label for="last_name" class="block text-gray-700 font-bold mb-2">size</label>
-            <input type="text" id="last_name"
+            <input type="text" id="size" [(ngModel)]="data.ctecdProductTypeSize"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Ukuran Product">
         </div>
 
         <div class="mb-4">
             <label for="company" class="block text-gray-700 font-bold mb-2">Detail Specification</label>
-            <input type="text" id="company"
+            <input type="text" id="detailspec" [(ngModel)]="data.ctecdProductTypeSpec"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Spesifikasi Detail">
         </div>
 
         <div class="mb-4">
             <label for="first_name" class="block text-gray-700 font-bold mb-2">Description</label>
-            <input type="text" id="first_name"
+            <input type="text" id="desc" [(ngModel)]="data.ctecdProducttypeDesc"
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 placeholder="Penjelasan Produk">
         </div>

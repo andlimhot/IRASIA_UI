@@ -10,6 +10,7 @@ import { RegistrationComponent } from "./MainScreen/Forms/registration/registrat
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RequestUploadListComponent } from './RequestEC/Forms/request-upload-list/request-upload-list.component';
+import { ListRequestComponent } from './RequestEC/Forms/list-request/list-request.component';
 
 
 @NgModule({
@@ -21,7 +22,7 @@ import { RequestUploadListComponent } from './RequestEC/Forms/request-upload-lis
     BrowserModule, FormLoginComponent,
     FormLogoutComponent, FormUserLoginComponent,
     RegistrationComponent, HttpClientModule, BrowserAnimationsModule,
-    RequestUploadListComponent
+    RequestUploadListComponent, ListRequestComponent
 ],
   providers: [],
   bootstrap: [AppComponent]

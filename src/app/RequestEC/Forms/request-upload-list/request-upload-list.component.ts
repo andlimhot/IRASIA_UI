@@ -13,6 +13,7 @@ import { producttypelist } from 'src/app/MasterApps/Models/productypelist';
 import { ProductProducttypeServService } from 'src/app/MasterApps/Services/product-producttype-serv.service';
 import { RequestDtl } from '../../Models/RequestDtl';
 import { ActivatedRoute, RouterLink, RouterLinkActive, RouterModule, RouterOutlet, Routes } from '@angular/router';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-request-upload-list',
@@ -26,6 +27,7 @@ import { ActivatedRoute, RouterLink, RouterLinkActive, RouterModule, RouterOutle
 
 export class RequestUploadListComponent implements OnInit {
   p_usr : string="aaaaa";
+  p_reqno: string="aaaaa";
   p_type:string ="aaaaa";
   preview='';
   preview2='';
@@ -53,6 +55,9 @@ export class RequestUploadListComponent implements OnInit {
   selectedFile4: any = null;
   file4image?:File;
   file4img:string="a";
+
+  rdtl : RequestDtl[]=[];
+  dataSource!: MatTableDataSource<any>;
 
   userid: string = 'USER09';
   data: RequestDtl = { 
@@ -114,12 +119,16 @@ export class RequestUploadListComponent implements OnInit {
 
 
   ngOnInit(): void {  
-    
+    console.log("URL:", this.route.url); 
     this.route.params.subscribe(params => {
      this.p_type = params['param1'];
+     this.p_reqno= params['param2'];
     });
-    alert('bbbbbb :'+this.p_type);
+    alert('bbbbbb :'+this.p_type+" ---- "+this.p_reqno);
     this.getProductList();
+    if (this.p_type='Update'){
+      this.getRequestDtl(this.p_reqno);
+    }
   }
 
   changeproduct() {
@@ -143,6 +152,33 @@ export class RequestUploadListComponent implements OnInit {
       });
       
   }
+
+  getRequestDtl(req:string){
+//  alert("customer no :"+this.custcd);
+alert('cccccc');
+this.rdtl=[];
+this.reqServ.getReqEcById(req).subscribe((res:RequestDtl[])=>{
+  this.rdtl=res;
+  for (var j = 0; j < this.rdtl.length; j++) {
+  this.data.ctecdCtechId=this.rdtl[j].ctecdCtechId;
+  this.data.ctecdId=this.rdtl[j].ctecdId;
+  this.data.ctecdProductCode=this.rdtl[j].ctecdProductCode;
+  this.data.ctecdProducttypeCode=this.rdtl[j].ctecdProducttypeCode;
+  this.data.ctecdProductName=this.rdtl[j].ctecdProductName;
+  this.data.ctecdProducttypeName=this.rdtl[j].ctecdProducttypeName;
+  this.data.ctecdProductTypeAlias=this.rdtl[j].ctecdProductTypeAlias;
+  this.data.ctecdProducttypeStockQty=this.rdtl[j].ctecdProducttypeStockQty;
+  this.data.ctecdProducttypePrice=this.rdtl[j].ctecdProducttypePrice;
+  this.data.ctecdProducttypeMinQty=this.rdtl[j].ctecdProducttypeMinQty;
+  this.data.ctecdProductTypeSize=this.rdtl[j].ctecdProductTypeSize;
+  this.data.ctecdProductTypeSpec=this.rdtl[j].ctecdProductTypeSpec;
+  this.data.ctecdProducttypeDesc=this.rdtl[j].ctecdProducttypeDesc;
+
+  }
+
+ });   
+}
+  
 
   onFileSelected(event: any, fileNumber: number) {
     switch (fileNumber) {
@@ -202,12 +238,10 @@ export class RequestUploadListComponent implements OnInit {
             this.file3image=fil;
             this.file3img=this.file3image.name;
             const reader = new FileReader();
-
             reader.onload=(e:any) => {
               console.log(e.target.result);
               this.preview3=e.target.result;
             };
-
             reader.readAsDataURL(this.file3image);
           }
         }
@@ -236,9 +270,6 @@ export class RequestUploadListComponent implements OnInit {
         break;
     }
   }
-
-
-
 
 
   submitRequest() {

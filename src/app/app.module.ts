@@ -16,7 +16,7 @@ import { routes } from './app.routes';
 
 const ROUTES: Routes = [ 
   { path: 'RequestList', component: ListRequestComponent },
-  { path: 'RequestCU/:param1', component: RequestUploadListComponent }
+  { path: 'RequestCU/:param1/:param2', component: RequestUploadListComponent }
 ];
 
 @NgModule({

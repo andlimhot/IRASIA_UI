@@ -80,7 +80,7 @@ export class ListRequestComponent implements OnInit{
     })  
     }
 
-    viewAddRequest(ptranstype:string){
+    AddRequest(ptranstype:string){
       const dialogRef =this.dialog.open(RequestUploadListComponent,{height:'90%',width:'80%'},);
         dialogRef.afterClosed().subscribe({
           next:(val) =>{
@@ -97,11 +97,11 @@ export class ListRequestComponent implements OnInit{
   
       }
 
-      viewAddJournal(tipe:string){
+      UpdateRequest(tipe:string, reqno:string){
        
-        this._router.navigate(['RequestCU', tipe]);
+        this._router.navigate(['RequestCU', tipe,reqno]);
      
-       
+        
         }
 
      

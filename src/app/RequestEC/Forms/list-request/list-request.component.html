@@ -16,7 +16,7 @@
     </div>
     <div class="w-full md:w-1/4 mb-4 md:mb-0 md:pl-0 text-center"> 
       <div class="text-white font-bold py-2 px-4 rounded">
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" (click)="viewAddRequest('New')">Add Request</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2" (click)="AddRequest('New')">Add Request</button>
       </div>
     </div>
   </div>
@@ -72,7 +72,7 @@
           <ng-container matColumnDef="action">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Action </th>
             <td mat-cell *matCellDef="let row">
-              <button mat-icon-button color="primary" (click)="viewAddJournal('Update')"
+              <button mat-icon-button color="primary" (click)="UpdateRequest('Update', row.vrlReqno)"
               ><mat-icon>edit</mat-icon></button>
               <button mat-icon-button color="accent"
               ><mat-icon>delete</mat-icon></button>

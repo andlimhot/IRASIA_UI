@@ -5,6 +5,6 @@ import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
   { path: 'RequestList', component: ListRequestComponent },
-  { path: 'RequestCU/:param1', component: RequestUploadListComponent },
+  { path: 'RequestCU/:param1/:param2', component: RequestUploadListComponent },
   { path: '', redirectTo: '/RequestList', pathMatch: 'full' }
 ];

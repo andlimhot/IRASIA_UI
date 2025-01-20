@@ -99,7 +99,7 @@ export class ListRequestComponent implements OnInit{
 
       UpdateRequest(tipe:string, reqno:string){
        
-        this._router.navigate(['RequestCU', tipe,reqno]);
+        this._router.navigate(['RequestUpdList', tipe,reqno]);
      
         
         }

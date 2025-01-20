@@ -18,4 +18,12 @@ export class ProductProducttypeServService {
     getProductTypeList(code:String): Observable<any>{
       return this.http.get<Array<producttypelist>>("http://localhost:8090/am-svc/appmst/getCmprtListByCmprCode?CmprCode="+code);  
     }
+
+    getProductByCode(code:String): Observable<any>{
+      return this.http.get<Array<productlist>>("http://localhost:8090/am-svc/appmst/getCmprSingle?code="+code);  
+    }
+
+    getProductTypeByCode(code:String): Observable<any>{
+      return this.http.get<Array<producttypelist>>("http://localhost:8090/am-svc/appmst/getCmprtListByCmprCode?CmprCode="+code);  
+    }
 }

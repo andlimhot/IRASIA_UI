@@ -19,6 +19,10 @@ export class RequestServService {
     return this.http.get<Array<RequestDtl>>("http://localhost:8091/wc-svc/webcust/getCtecdListByCtechId?CtechId="+req);
   }
 
+  getReqEcByIdNo(req: string, no: string): Observable<any> {
+    return this.http.get<Array<RequestDtl>>("http://localhost:8091/wc-svc/webcust/getCtecdListByCtechIdAndCtecdId?CtechId="+req+"&CtecdId="+no);
+  }
+
   getVReqByuser(usr:string): Observable<vrequestlist[]> {
     return this.http.get<vrequestlist[]>("http://localhost:8091/wc-svc/webcust/getVReqByUser?usr="+usr);
   }
@@ -56,4 +60,8 @@ export class RequestServService {
     return this.http.delete('http://localhost:8091/wc-svc/webcust/DeleteRequestPic?ctih='+ctih+'&ctid='+ctid);
   }
   
+  getImages(custNo: string, requestno: string, no: string): Observable<string[]> {
+    const url = `http://localhost:8091/wc-svc/images/${custNo}/REQUEST/${requestno}?no=${no}`;
+    return this.http.get<string[]>(url);
+  }
 }

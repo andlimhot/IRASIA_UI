@@ -13,16 +13,18 @@ import { RequestUploadListComponent } from './RequestEC/Forms/request-upload-lis
 import { ListRequestComponent } from './RequestEC/Forms/list-request/list-request.component';
 import { RouterModule, Routes } from '@angular/router';
 import { routes } from './app.routes';
+import { ReqUpdateListComponent } from './RequestEC/Forms/req-update-list/req-update-list.component';
 
 const ROUTES: Routes = [ 
   { path: 'RequestList', component: ListRequestComponent },
-  { path: 'RequestCU/:param1/:param2', component: RequestUploadListComponent }
+  { path: 'RequestUpdList/:param1/:param2', component: ReqUpdateListComponent },
+  { path: 'RequestCU/:param1/:param2/:param3', component: RequestUploadListComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderCompComponent
+    HeaderCompComponent,
   ],
   imports: [
     BrowserModule, FormLoginComponent,

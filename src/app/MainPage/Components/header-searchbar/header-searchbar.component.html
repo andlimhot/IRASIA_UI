@@ -1,0 +1,75 @@
+<div class="bg-white py-1">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-gray-600 text-sm">
+            <a href="#" class="mr-4 hover:text-gray-800">About</a>
+            <a class="mr-4 hover:text-gray-800">Need help? Call: +1 (021) 321-4567</a>
+        </div>
+        <div class="flex items-center">
+            <div class="relative mr-6">
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+                    </svg>
+                </div>
+            </div>
+
+            <a href="#" class="ml-6 text-gray-600 hover:text-gray-800">My Account</a>
+        </div>
+    </div>
+</div>
+
+<div class="bg-white py-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <div class="text-3xl font-bold text-orange-500">
+            <a href="a">
+                <img src="assets/ialogo_awal.png" class="w-25">
+            </a>
+        </div>
+        <div class="relative w-1/2">
+            <input type="text"
+                class="border border-gray-300 rounded-md px-4 py-2 w-full focus:outline-none focus:ring-2 focus:ring-orange-500"
+                placeholder="Search Products...">
+            <button class="absolute right-0 top-0 bg-orange-500 hover:bg-orange-600 text-white rounded-md px-6 py-2">
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <path
+                        d="M12.9 14.32a8 8 0 1 1 1.41-1.41l5.35 5.33-1.42 1.42-5.33-5.34zM8 14A6 6 0 1 0 8 2a6 6 0 0 0 0 12z" />
+                </svg>
+            </button>
+        </div>
+        <div class="flex items-center">
+            <div class="relative mr-6">
+                <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <img src="/assets/notification-bell.png" alt="Logo">
+                    </div>
+                    <div class="text-xs leading-3">Notif</div>
+                    <span
+                        class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">8</span>
+                </a>
+                <span
+                    class="absolute top-0 right-0 w-5 h-5 rounded-full flex items-center justify-center bg-yellow-500 text-white text-xs">12</span>
+            </div>
+            <div class="relative">
+                <a href="#" class="text-center text-gray-700 hover:text-primary transition relative">
+                    <div class="text-2xl">
+                        <img src="/assets/shopping-cart.png" alt="Logo">
+                    </div>
+                    <div class="text-xs leading-3">Cart</div>
+                    <span
+                        class="absolute right-0 -top-1 w-5 h-5 rounded-full flex items-center justify-center bg-primary text-white text-xs">9</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<div *ngIf="images && images.length > 0" class="carousel-container">
+    <img *ngFor="let image of images; let i = index" [src]="image.imageScr" [alt]="image.imageAlt"
+        [ngClass]="{'image-active':selectedIndex === i}">
+  
+    <div class="caraousel-dot-container">
+        <span *ngFor="let dot of images; let i=index" class="dot" [ngClass]="{'active': selectedIndex===i}"
+            (click)="selectedImage(i)">
+  
+        </span>
+    </div>
+  </div>

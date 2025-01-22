@@ -30,49 +30,20 @@ export class ReqUpdateListComponent implements OnInit {
   p_usr: string = "aaaaa";
   p_reqno: string = "aaaaa";
   p_type: string = "aaaaa";
-  selectedFile1: any = null;
-  file1image?: File;
-  file1img: string = "a";
-  preview = '';
-  file1: any = null;
-
-  selectedFile2: any = null;
-  file2image?: File;
-  file2img: string = "a";
-  preview2 = '';
-  file2: any = null;
-
-  selectedFile3: any = null;
-  file3image?: File;
-  file3img: string = "a";
-  preview3 = '';
-  file3: any = null;
-
-  selectedFile4: any = null;
-  file4image?: File;
+  
+  file1img: string = "a"; 
+  file2img: string = "a";  
+  file3img: string = "a";  
   file4img: string = "a";
-  preview4 = '';
-  file4: any = null;
-
-  fils: any[] = [];
+ 
 
   prodlist: productlist[] = [];
   prodtylist: producttypelist[] = [];
   rdtl: RequestDtl[] = [];
-  selectedImage: any;
   userid: string = 'USER09';
-  imageUrls: string[] = [];
-  files: File[] = [];
-  productName: string = "ccc";
-  productPrice: string = "aaaa";
+  imageUrls: string[] = [];  
+  productName: string = "ccc"; 
   producttype: string = "aaaa";
-  size: string = "aaaa";
-  detail: string = "aaaa";
-  desc: string = "aaaa";
-  stock: string = "aaaa";
-  alias: string = "aaaa";
-  minpurch: string = "aaaa";
-
   data: requestlistupd[] = [];
 
   constructor(private reqServ: RequestServService, private formBuider: FormBuilder, private dialog:MatDialog,

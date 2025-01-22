@@ -14,6 +14,8 @@ import { ListRequestComponent } from './RequestEC/Forms/list-request/list-reques
 import { RouterModule, Routes } from '@angular/router';
 import { routes } from './app.routes';
 import { ReqUpdateListComponent } from './RequestEC/Forms/req-update-list/req-update-list.component';
+import { HeaderSearchbarComponent } from "./MainPage/Components/header-searchbar/header-searchbar.component";
+import { ProductsProductTypesComponent } from "./MainPage/Components/products-product-types/products-product-types.component";
 
 const ROUTES: Routes = [ 
   { path: 'RequestList', component: ListRequestComponent },
@@ -30,7 +32,9 @@ const ROUTES: Routes = [
     BrowserModule, FormLoginComponent,
     FormLogoutComponent, FormUserLoginComponent,
     RegistrationComponent, HttpClientModule, BrowserAnimationsModule,
-    RequestUploadListComponent, ListRequestComponent,   RouterModule.forRoot(ROUTES)
+    RequestUploadListComponent, ListRequestComponent, RouterModule.forRoot(ROUTES),
+    HeaderSearchbarComponent,
+    ProductsProductTypesComponent
 ],
 
   providers: [],

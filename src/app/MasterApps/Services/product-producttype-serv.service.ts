@@ -15,6 +15,11 @@ export class ProductProducttypeServService {
       return this.http.get<Array<productlist>>("http://localhost:8090/am-svc/appmst/getCmprListAll");  
     }
 
+    getImageProducts(): Observable<string[]> {
+      const url = `http://localhost:8090/am-svc/images/productImg`;
+      return this.http.get<string[]>(url);
+    }
+
     getProductTypeList(code:String): Observable<any>{
       return this.http.get<Array<producttypelist>>("http://localhost:8090/am-svc/appmst/getCmprtListByCmprCode?CmprCode="+code);  
     }

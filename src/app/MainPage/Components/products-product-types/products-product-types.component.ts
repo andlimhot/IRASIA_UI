@@ -5,15 +5,6 @@ import { ProductProducttypeServService } from 'src/app/MasterApps/Services/produ
 import { producttypelist } from 'src/app/MasterApps/Models/productypelist';
 import { scrollproductlist } from '../../Models/scrollproductlist';
 
-interface Item {
-  image: string;
-  title: string;
-  description: string;
-  rating: number;
-  reviews: number;
-  price: number;
-}
-
 
 @Component({
   selector: 'app-products-product-types',
@@ -24,90 +15,102 @@ interface Item {
 })
 export class ProductsProductTypesComponent implements OnInit {
   @ViewChild('carousel') carousel!: ElementRef;
-  prodlist:productlist[]=[];
-  dataprod:scrollproductlist[]=[];
+  prodlist: productlist[] = [];
+  dataprod: scrollproductlist[] = [];
+  dataprodtype: scrollproductlist[] = [];
   prodtylist: producttypelist[] = [];
   currentIndex = 1;
-  productName: string = "ccc"; 
+  productcode: string = "ccc";
   producttype: string = "aaaa";
-  imageUrls: string[] = [];  
+  imageUrls: string[] = [];
 
-  constructor(private servmaster:ProductProducttypeServService){
-  
+  showDropdown: boolean[] = [];
+  showHomeDropdown = false;
+
+  constructor(private servmaster: ProductProducttypeServService) {
+
   };
 
-  ngOnInit(): void {  
+  ngOnInit(): void {
     this.getProductList();
 
-    };
-  
-    getbank() {
-      this.prodlist = [];  
-      this.servmaster.getProductList().subscribe((res: productlist[]) => {
-        this.prodlist = res;   
-      });
-    }
+  };
+
+  getbank() {
+    this.prodlist = [];
+    this.servmaster.getProductList().subscribe((res: productlist[]) => {
+      this.prodlist = res;
+    });
+  }
 
   next() {
     this.currentIndex = (this.currentIndex + 1) % this.dataprod.length;
-     
+
     this.updateCarouselPosition();
-  
+
   }
 
-  prev() {    
-    this.currentIndex = (this.currentIndex - 1 + this.dataprod.length) % this.dataprod.length;    
-    if ((this.currentIndex*2)<(this.currentIndex - 1 + this.dataprod.length)){      
-    this.updateCarouselPosition();
-  }else{
-    this.currentIndex=1;
-  }
+  prev() {
+    this.currentIndex = (this.currentIndex - 1 + this.dataprod.length) % this.dataprod.length;
+    if ((this.currentIndex * 2) < (this.currentIndex - 1 + this.dataprod.length)) {
+      this.updateCarouselPosition();
+    } else {
+      this.currentIndex = 1;
+    }
   }
 
   async getProductList() {
-    this.prodlist=[];
-    this.dataprod=[];
+    this.prodlist = [];
+    this.dataprod = [];
     await this.getImageProducts();
-      this.servmaster.getProductList().subscribe((res: productlist[]) => {
-        this.prodlist = res;
-        this.productName = this.prodlist[0].cmprName;
-        for (var k = 0; k < this.prodlist.length; k++) {
-          this.dataprod.push({
-            prodno:this.prodlist[k].cmprCode.toString(),
-            image: this.imageUrls[k],
-            title: this.prodlist[k].cmprName,     
-          });
-          
-        }
-  
-      });
-    }
-  
-    getProducttypeList(value: any) {
-      this.servmaster.getProductTypeByCode(value).subscribe((res: producttypelist[]) => {
-        this.prodtylist = res;
-        this.producttype = this.prodtylist[0].cmprtTypeDesc;
-      });
-  
-    }
+    this.servmaster.getProductList().subscribe((res: productlist[]) => {
+      this.prodlist = res;
+      this.productcode = this.prodlist[0].cmprCode.toString();
+      for (var k = 0; k < this.prodlist.length; k++) {
+        this.dataprod.push({
+          prodno: this.prodlist[k].cmprCode.toString(),
+          image: this.imageUrls[k],
+          title: this.prodlist[k].cmprName,
+        });
+      }
+    });
+  }
 
-    async getImageProducts(){
-       this.servmaster.getImageProducts().subscribe(
-        (data: string[]) => {
-          this.imageUrls = data;
-           //  alert("eeeekkkkk1111: "+ this.imageUrls.length );
-        },
-        (error) => {
-          console.error('Error fetching images:', error);
-        }
-      );
-    }
+  async getProducttypeList(value: any) {
+    this.prodtylist = [];
+    this.dataprodtype = [];
+   // await this.getImageProducts();
+    this.servmaster.getProductTypeList(value).subscribe((res: producttypelist[]) => {
+      this.prodtylist = res;
+      for (var k = 0; k < this.prodlist.length; k++) {
+        alert("aaaaa :"+this.prodtylist[k].cmprtImgFilepath);
+      }
+      //this.productcode = this.prodlist[0].cmprCode.toString();
+    //  for (var k = 0; k < this.prodlist.length; k++) {
+    //    this.dataprod.push({
+     //     prodno: this.prodlist[k].cmprCode.toString(),
+     //     image: this.imageUrls[k],
+     //     title: this.prodlist[k].cmprName,
+   //     });
+   //   }
+    });
+  }
 
-    pickProduct(no:string){
-      alert("aaaaaa :"+no);
-    }
+  async getImageProducts() {
+    this.servmaster.getImageProducts().subscribe(
+      (data: string[]) => {
+        this.imageUrls = data;
+        //  alert("eeeekkkkk1111: "+ this.imageUrls.length );
+      },
+      (error) => {
+        console.error('Error fetching images:', error);
+      }
+    );
+  }
 
-
+  pickProduct(no: string) {
+    this.getProducttypeList(no);
+  }
 
   updateCarouselPosition() {
     const carouselElement = this.carousel.nativeElement;
